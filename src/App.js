@@ -1,7 +1,22 @@
 import './App.css';
-import { Box, Button, HStack, Text } from '@chakra-ui/react';
+import { Box, Button, Text } from '@chakra-ui/react';
 
 function App() {
+  const handleButtonPress = async () => {
+    const port = await navigator.serial.requestPort();
+    await port.open({ baudRate: 9600 });
+    const writer = port.writable.getWriter();
+    // Send out data we don't care what it is
+    const data = "motor 0 moved";
+    writer.write(data).then(() => {
+      // Data written successfully
+      console.log(JSON.stringify(data));
+    }).catch(error => {
+      // Error writing data
+    });
+
+  };
+
   return (
     <Box h={"100vh"} w={"100vw"} bgColor="#15142A">
       <Box display={"flex"} position="absolute" top="20px" justifyContent={"center"} alignItems="center" w="100%">
@@ -16,17 +31,10 @@ function App() {
           Body
         </Text>
       </Box>
-      <Box display={"flex"} position="absolute" bottom="20px" justifyContent={"center"} alignItems="center" w="100%">
-        <Box>
-          <HStack gap="2" width={"100%"}>
-            <Button>Send Serial </Button>
-            <Text color="white">
-              Footer
-            </Text>
-          </HStack>
-        </Box>
+      <Box display={"flex"} position="absolute" bottom="20px" alignItems="center" w="100%">
+        <Button onClick={handleButtonPress}>Send Serial </Button>
       </Box>
-    </Box >
+    </Box>
   );
 }
 
