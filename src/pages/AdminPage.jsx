@@ -20,6 +20,14 @@ export default function AdminPage() {
     }
   };
 
+  const handleSubmit = () => {
+    console.log("TODO: Handle Form Submission");
+  };
+
+  const handlePasswordRecovery = () => {
+    console.log("TODO: Handle password recovery");
+  };
+
   return (
     <Box height="100vh" width="100vw" alignItems="center" display="flex" justifyContent={"center"} backgroundColor="#080808">
       <Box height="60%" width="40%" backgroundColor={"#2A2626"} alignContent={"center"} flexDir="column" gap={10} justifyContent={"space-evenly"} paddingRight="10" paddingLeft="10" display={"flex"} borderRadius={9}>
@@ -27,6 +35,10 @@ export default function AdminPage() {
         <HStack space={2}>
           <Input placeholder='Password' textColor={"white"} fontFamily="monospace" type={showPassword ? "text" : "password"} />
           <Button onClick={() => { setShowPassword(!showPassword) }}>{showPassword ? "Hide" : "Show"}</Button>
+        </HStack>
+        <HStack justifyContent="space-between" flexDir={"row"} width="100%">
+          <Button onClick={handleSubmit}>Submit</Button>
+          <Button onClick={handlePasswordRecovery}>Forgot Password</Button>
         </HStack>
       </Box>
       <Box position="absolute" bottom={10} display="flex" justifyContent={"flex-start"} width="100%" paddingLeft="10px">
