@@ -1,20 +1,17 @@
-import { Box, Button } from '@chakra-ui/react';
-import React, { useState } from 'react'
+import { Box, Button, Input } from '@chakra-ui/react';
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import MyContext from '../Context';
 
 export default function AdminPage() {
   const navigate = useNavigate();
-  // const [contextState, setContextState] = useState(null);
+  const { setMyContextState } = useContext(MyContext);
 
   const handleButtonPress = async () => {
     try {
-      console.log(navigator.serial);
-      // TODO: Test with genuine serial connection
-      // const port = await navigator.serial.requestPort();
-      // await port.open({ baudRate: 9600 });
-      // setContextState({ port: "port" });
-
+      const port = await navigator.serial.requestPort();
+      await port.open({ baudRate: 9600 });
+      setMyContextState(port);
       navigate('/home-page');
 
     } catch (error) {
@@ -23,10 +20,14 @@ export default function AdminPage() {
   };
 
   return (
-    <MyContext.Provider value={{ port: "port" }}>
-      <Box height="100vh" width="100vw" alignItems="center" display="flex" justifyContent={"center"} backgroundColor="blue">
-        <Button onClick={handleButtonPress}>AdminPage</Button>
+    <Box height="100vh" width="100vw" alignItems="center" display="flex" justifyContent={"center"} backgroundColor="blue">
+      <Box height="60%" width="40%" backgroundColor={"red"} alignContent={"center"} flexDir="column" gap={10} justifyContent={"space-evenly"} paddingRight="10" paddingLeft="10" display={"flex"}>
+        <Input placeholder='Username' />
+        <Input placeholder='Password' />
       </Box>
-    </MyContext.Provider>
+      <Box position="absolute" bottom={10} display="flex" justifyContent={"flex-start"} width="100%" paddingLeft="10px">
+        <Button onClick={handleButtonPress}>Config Port</Button>
+      </Box>
+    </Box>
   )
 }
