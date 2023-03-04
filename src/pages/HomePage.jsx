@@ -5,11 +5,11 @@ import MyContext from '../Context';
 
 export default function HomePage() {
     const navigate = useNavigate();
-    const { myContextState } = useContext(MyContext);
+    const { myContextState: port } = useContext(MyContext);
 
     const handleButtonPress = async () => {
         // // TODO: pass port context to see if works or not
-        const writer = myContextState.writable.getWriter();
+        const writer = port.writable.getWriter();
         // Send out data we don't care what it is
         const encoder = new TextEncoder();
         const data = "motor 0 moved";
@@ -24,7 +24,7 @@ export default function HomePage() {
                 <Button onClick={handleButtonPress}>Get Candy</Button>
                 <Button onClick={() => {
                     navigate("/");
-                    myContextState.close();
+                    port.close();
                 }}>
                     Admin Page
                 </Button>
