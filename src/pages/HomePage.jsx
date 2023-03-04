@@ -8,7 +8,6 @@ export default function HomePage() {
     const { myContextState: port } = useContext(MyContext);
 
     const handleButtonPress = async () => {
-        // // TODO: pass port context to see if works or not
         const writer = port.writable.getWriter();
         // Send out data we don't care what it is
         const encoder = new TextEncoder();
@@ -19,7 +18,7 @@ export default function HomePage() {
         console.log(JSON.stringify(data));
     };
     return (
-        <Box height="100vh" width="100vw" alignItems="center" display="flex" justifyContent={"center"} backgroundColor="purple">
+        <Box height="100vh" width="100vw" alignItems="center" display="flex" justifyContent={"center"} backgroundColor="#080808">
             <Box position="absolute" bottom={10} height="10vh" width="100vw" paddingLeft={"10px"} justifyContent="space-between" paddingRight={"10px"} display="flex">
                 <Button onClick={handleButtonPress}>Get Candy</Button>
                 <Button onClick={() => {
