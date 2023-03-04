@@ -9,7 +9,6 @@ export default function HomePage() {
 
     const handleButtonPress = async () => {
         const writer = port.writable.getWriter();
-        // Send out data we don't care what it is
         const encoder = new TextEncoder();
         const data = "motor 0 moved";
         const arrayBuffer = encoder.encode(data);
