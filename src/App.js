@@ -11,8 +11,8 @@ function App() {
   return (
     <MyContext.Provider value={{ myContextState: myContextState, setMyContextState: setMyContextState }}>
       <Routes>
-        <Route index path="home-page" element={<HomePage />} />
         <Route index element={<AdminPage />} />
+        <Route path="home-page" element={<HomePage />} />
       </Routes>
     </MyContext.Provider>
   );
